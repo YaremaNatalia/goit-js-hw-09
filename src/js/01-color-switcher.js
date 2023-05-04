@@ -19,15 +19,17 @@ function onStopBtn() {
   refs.startBtn.removeAttribute('disabled');
 }
 
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215)
-    .toString(16)
-    .padStart(6, 0)}`;
-}
+
 
 function setRandomColor() {
   const randomColor = getRandomHexColor();
   document.body.style.backgroundColor = randomColor; // змінюємо колір body через inline style
   refs.startBtn.setAttribute('disabled', 'disabled'); // додаємо атрибут кнопці старт disabled (неактивний)
   // refs.startBtn.setAttribute('disabled', 'true');
+}
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }
