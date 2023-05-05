@@ -37,7 +37,7 @@ function onSubmit(event) {
       const promise = createPromise(position, delay + step * (position - 1)); //зміна промісу через зміну затримки виведення
       promise
         .then(({ position, delay }) => {
-          Notiflix.Notify.failure(
+          Notiflix.Notify.success(
             `✅ Fulfilled promise ${position} in ${delay}ms`
           );
         })
