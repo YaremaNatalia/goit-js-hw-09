@@ -1,6 +1,5 @@
 import flatpickr from 'flatpickr'; // щоб дозволити користувачеві кросбраузерно вибрати кінцеву дату і час в одному елементі інтерфейсу
 import 'flatpickr/dist/flatpickr.min.css'; // Додатковий імпорт стилів
-// const flatpickr = require('flatpickr');
 import Notiflix from 'notiflix'; //  відображення повідомлень користувачеві, замість window.alert()
 import refs from './02-references';
 import { convertMs, renderTimer } from './02-functions'; //іменоване імпортування обєкта з функціями
