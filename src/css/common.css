@@ -17,14 +17,66 @@ img {
   max-width: 100%;
 }
 
+a {
+  font-size: 18px;
+  font-weight: 500;
+  color: #007bff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* =================TIMER============== */
+
+.datetime-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#datetime-picker {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #555;
+}
+
+button[data-start],
+button[data-stop] {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: #007bff;
+  color: #fff;
+}
+
+button[data-start]:hover,
+button[data-stop]:hover {
+  background-color: #0069d9;
+}
+
+button[data-start]:disabled {
+  background-color: #ccc;
+}
+
 .timer {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 35px;
-  font-weight: bold;
   text-align: center;
   margin: 20px 0;
+  font-size: 35px;
+  font-weight: 700;
 }
 
 .field {
@@ -37,14 +89,61 @@ img {
 .value {
   display: block;
   padding: 10px;
-  background-color: #2196f3;
-  color: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
+  background-color: #007bff;
+  color: #fff;
 }
 
 .label {
   text-transform: uppercase;
   font-size: 18px;
   color: #555;
+}
+
+/* =================PROMISES============== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+input[type='number'] {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+
+button[type='submit'] {
+  width: 200px;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  background-color: #007bff;
+}
+
+button[type='submit']:hover {
+  background-color: #0069d9;
+}
+
+input:required {
+  border-color: #da172b;
+}
+
+input:valid {
+  border-color: #11a934;
 }
