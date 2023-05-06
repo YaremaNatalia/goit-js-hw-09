@@ -7,7 +7,8 @@ import { convertMs, renderTimer } from './02-functions'; //іменоване і
 // вішаємо слухачі подій
 refs.startBtn.addEventListener('click', onStartBtn);
 
-let pickDate = null; // створення змінної обраної дати, щоб потім можна було її використати в коді за межами функції, де присвоєно перше значення
+refs.startBtn.setAttribute('disabled', 'disabled'); // додаємо атрибут кнопці старт disabled (неактивний) при завантаженні сторінки
+let pickDate = null; // !створення змінної обраної дати, щоб потім можна було її використати в коді за межами функції, де присвоєно перше значення
 
 // створення обєкту, що дає можливість користувачеві кросбраузерно вибрати кінцеву дату і час в одному елементі інтерфейсу
 flatpickr('#datetime-picker', {
@@ -22,8 +23,8 @@ flatpickr('#datetime-picker', {
     const nowDate = new Date().getTime();
 
     if (pickDate < nowDate) {
-      Notiflix.Notify.failure('Please choose a date in the future.');
       refs.startBtn.setAttribute('disabled', 'disabled'); // додаємо атрибут кнопці старт disabled (неактивний)
+      Notiflix.Notify.failure('Please choose a date in the future.');
     } else {
       refs.startBtn.removeAttribute('disabled');
     }
@@ -33,8 +34,9 @@ flatpickr('#datetime-picker', {
 let intervalId = null; // обявлення id інтервалу,
 
 function onStartBtn() {
-  clearInterval(intervalId); // очищення щоб не запускалось одразу кілька інтервалів
+  clearInterval(intervalId); // !очищення щоб не запускалось одразу кілька інтервалів
   intervalId = setInterval(handleTime, 1000); // запуск інтервалу,встановлення id інтервалу з проміжком 1 с і колбек функцією для запуску таймера
+  refs.startBtn.setAttribute('disabled', 'disabled');
 }
 
 function handleTime() {

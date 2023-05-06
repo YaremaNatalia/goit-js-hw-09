@@ -29,49 +29,25 @@ function onSubmit(event) {
   const delay = parseInt(form.elements.delay.value); // отримання цілого числа з інпуту форми
   const step = parseInt(form.elements.step.value);
   const amount = parseInt(form.elements.amount.value);
-  let position = 1; // введення змінної позиції з присвоюванням одиниці
-  const delayTimeInterval = step === 0 ? 0 : delay + step * (position - 1); // перевірка тернарним оператором, якщо затримка між промісами 0, поява одночасно, якщо ні - чергово
 
-  // реалізація кількості промісів залежно від кількості в інпуті amount через метод setInterval
-  const intervalId = setInterval(() => {
-    if (position <= amount) {
-      const delayTimePromises = delay + step * (position - 1); // затримка між промісами
-      const promise = createPromise(position, delayTimePromises); //зміна промісу через зміну затримки виведення
-      promise
-        .then(({ position, delay }) => {
-          Notiflix.Notify.success(
-            `✅ Fulfilled promise ${position} in ${delay}ms`
-          );
-        })
-        .catch(({ position, delay }) => {
-          Notiflix.Notify.failure(
-            `❌ Rejected promise ${position} in ${delay}ms`
-          );
-        });
-      position += 1; //позиція збільшується на один кожного інтервалу
-    } else {
-      clearInterval(intervalId); // зупинка інтервалу коли позиція досягла кількості amount
-    }
-  }, delayTimeInterval); // інтервал затримки
-
-  // Значение delay определяется пользователем в форме, а затем для каждого вызова функции createPromise задержка увеличивается на значение шага (step), умноженного на текущую позицию (position) минус 1. Таким образом, для первого вызова позиция равна 1, а для последующих вызовов она будет увеличиваться на единицу.
-
-  // Например, если пользователь ввел значение delay = 1000, step = 500, amount = 3, то для первого вызова функции задержка будет равна 1000, для второго вызова - 1500 (1000 + 1 * 500), а для третьего - 2000 (1000 + 2 * 500). Это позволяет создавать промисы с увеличивающейся задержкой между ними.
-
-  //=======variant 2=========
-
-  // for (let position = 1; position <= amount; position += 1) {
-  //   const promise = createPromise(position, delay + step * (position - 1));
-  //   promise
-  //     .then(({ position, delay }) => {
-  //       Notiflix.Notify.success(
-  //         `✅ Fulfilled promise ${position} in ${delay}ms`
-  //       );
-  //     })
-  //     .catch(({ position, delay }) => {
-  //       Notiflix.Notify.failure(
-  //         `❌ Rejected promise ${position} in ${delay}ms`
-  //       );
-  //     });
-  // }
+  //створення промісів через цикл for
+  for (let position = 1; position <= amount; position += 1) {
+    // введення змінної позиції з присвоюванням одиниці
+    createPromise(position, delay + step * (position - 1))
+      .then(({ position, delay }) => {
+        Notiflix.Notify.success(
+          `✅ Fulfilled promise ${position} in ${delay}ms`
+        );
+      })
+      .catch(({ position, delay }) => {
+        Notiflix.Notify.failure(
+          `❌ Rejected promise ${position} in ${delay}ms`
+        );
+      });
+  }
+  form.reset(); // !очищення форми при сабміті
 }
+
+// Значение delay определяется пользователем в форме, а затем для каждого вызова функции createPromise задержка увеличивается на значение шага (step), умноженного на текущую позицию (position) минус 1. Таким образом, для первого вызова позиция равна 1, а для последующих вызовов она будет увеличиваться на единицу.
+
+// Например, если пользователь ввел значение delay = 1000, step = 500, amount = 3, то для первого вызова функции задержка будет равна 1000, для второго вызова - 1500 (1000 + 1 * 500), а для третьего - 2000 (1000 + 2 * 500). Это позволяет создавать промисы с увеличивающейся задержкой между ними.
